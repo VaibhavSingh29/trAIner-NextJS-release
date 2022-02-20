@@ -1,0 +1,38 @@
+{
+  "name": "trainer-frontend-next.js",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3005",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@mediapipe/camera_utils": "^0.3.1640029074",
+    "@mediapipe/pose": "^0.5.1635988162",
+    "@tensorflow/tfjs": "^3.13.0",
+    "axios": "^0.21.1",
+    "bootstrap": "^5.1.0",
+    "bulma": "^0.9.3",
+    "formik": "^2.2.9",
+    "next": "11.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "react-redux": "^7.2.4",
+    "react-webcam": "^6.0.1",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.1.0"
+  }
+}
