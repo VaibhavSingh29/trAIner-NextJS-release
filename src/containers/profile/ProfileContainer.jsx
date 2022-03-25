@@ -1,20 +1,8 @@
-import React, { useState } from 'react';
-import ViewProfile from '../../components/profile/ViewProfile';
+import React, { useState } from "react";
+import ViewProfile from "../../components/profile/ViewProfile";
 
 const ProfileContainer = () => {
-
-	return (
-	<ViewProfile/>
-	);
-}
+  return <ViewProfile />;
+};
 
 export default ProfileContainer;
-
-
-
-
-
-
-
-
-

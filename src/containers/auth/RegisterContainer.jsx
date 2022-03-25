@@ -1,92 +1,85 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from 'next/link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import * as yup from 'yup';
-import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import {authenticateRegister} from '../../../redux/ducks/auth';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "next/link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { authenticateRegister } from "../../../redux/ducks/auth";
 
-const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/
-
+const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-      backgroundColor: '#0CF4E2',
-      color: '#201A30',
-      borderRadius: 20,
-    },
-    link: {
-      color: '#0cf4e2',
-    }
-  }));
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#0CF4E2",
+    color: "#201A30",
+    borderRadius: 20,
+  },
+  link: {
+    color: "#0cf4e2",
+  },
+}));
 
 const validationSchema = yup.object({
-  name: yup
-    .string('Enter your name')
-    .required('Name is required'),
+  name: yup.string("Enter your name").required("Name is required"),
   phone: yup
-    .string('Enter your phone number')
-    .matches(phoneRegExp, 'Enter a valid phone number')
-    .required('Phone number is required'),
-    // .min(10, 'Enter a valid phone number'),
+    .string("Enter your phone number")
+    .matches(phoneRegExp, "Enter a valid phone number")
+    .required("Phone number is required"),
+  // .min(10, 'Enter a valid phone number'),
   email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
   password: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
-  confirmPassword: yup.string()
-    .oneOf([yup.ref('password'), null], 'Password does not match')
-  
+    .string("Enter your password")
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Password does not match"),
 });
 
-
-const RegisterContainer = ()=> {
-
+const RegisterContainer = () => {
   const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      phone: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
+      name: "",
+      phone: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const {name, phone, email, password} = values;
-      dispatch(authenticateRegister({name, phone, email, password}))
-    }
-  })
-
-
+      const { name, phone, email, password } = values;
+      dispatch(authenticateRegister({ name, phone, email, password }));
+    },
+  });
 
   const classes = useStyles();
 
@@ -97,12 +90,12 @@ const RegisterContainer = ()=> {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" className='pb-2'>
+        <Typography component="h1" variant="h5" className="pb-2">
           Sign up
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-          <Grid item xs={12}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 fullWidth
@@ -169,8 +162,14 @@ const RegisterContainer = ()=> {
                 id="confirmPassword"
                 autoComplete="off"
                 onChange={formik.handleChange}
-                error={formik.touched.confirmPassword && formik.errors.confirmPassword}
-                helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                error={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
+                helperText={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
               />
             </Grid>
           </Grid>
@@ -183,19 +182,20 @@ const RegisterContainer = ()=> {
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="center" alignItems='center'>
+          <Grid container justifyContent="center" alignItems="center">
             <Grid item>
               <Link href="/login" variant="body2">
-              <a style={{textDecoration: 'none', color: '#0cf4e2'}}>{"Already have an account? Sign in"}</a>
+                <a style={{ textDecoration: "none", color: "#0cf4e2" }}>
+                  {"Already have an account? Sign in"}
+                </a>
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-      </Box>
+      <Box mt={5}></Box>
     </Container>
   );
-}
+};
 
 export default RegisterContainer;

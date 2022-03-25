@@ -1,6 +1,7 @@
 // import { combineReducers, createStore } from "redux";
-import authReducer from '../redux/ducks/auth';
-import profileReducer from '../redux/ducks/profile';
+import authReducer, { deauthenticate } from "../redux/ducks/auth";
+import profileReducer from "../redux/ducks/profile";
+import snackbarReducer from "../redux/ducks/snackbar";
 
 // //we'll have multiple reducers
 // const reducer = combineReducers({
@@ -9,31 +10,32 @@ import profileReducer from '../redux/ducks/profile';
 // //won't work unless we pass a reducer into our createStore function
 // const store = createStore(reducer);
 
-
-import { useMemo } from 'react';
-import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { persistCombineReducers } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import thunk from 'redux-thunk';
+import { useMemo } from "react";
+import { applyMiddleware, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { persistCombineReducers } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import thunk from "redux-thunk";
 
 let store;
 
 const persistedReducer = persistCombineReducers(
-  { key: 'primary', storage, blacklist: [] },
+  { key: "primary", storage, blacklist: [] },
   {
-      auth: authReducer,
-      profile: profileReducer,
+    auth: authReducer,
+    profile: profileReducer,
+    snackbar: snackbarReducer,
   }
 );
 
-const makeStore = (initialState = {}) => createStore(
-  persistedReducer,
-  initialState,
-  process.env.NODE_ENV === 'production'
-    ? applyMiddleware(thunk)
-    : composeWithDevTools(applyMiddleware(thunk))
-);
+const makeStore = (initialState = {}) =>
+  createStore(
+    persistedReducer,
+    initialState,
+    process.env.NODE_ENV === "production"
+      ? applyMiddleware(thunk)
+      : composeWithDevTools(applyMiddleware(thunk))
+  );
 
 export const initializeStore = (preloadedState) => {
   let _store = store ?? makeStore(preloadedState);
@@ -46,7 +48,7 @@ export const initializeStore = (preloadedState) => {
     store = undefined;
   }
 
-  if (typeof window === 'undefined') return _store;
+  if (typeof window === "undefined") return _store;
 
   if (!store) store = _store;
 
@@ -56,6 +58,5 @@ export const initializeStore = (preloadedState) => {
 export const useStore = (initialState) => {
   return useMemo(() => initializeStore(initialState), [initialState]);
 };
-
 
 // export default store;
